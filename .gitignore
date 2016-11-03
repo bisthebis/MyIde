@@ -1,0 +1,7 @@
+CMakeLists.txt.user
+CMakeFiles/*
+*.so
+*.o
+Makefile
+cmake_*
+build/*
