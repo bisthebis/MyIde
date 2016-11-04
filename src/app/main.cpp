@@ -7,17 +7,17 @@
 #include "dialog_output.h"
 
 int main(int argc, char** argv)
-{
-    QApplication app(argc, argv);
+    {
+        QApplication app(argc, argv);
 
-    auto compilers = findCompilers();
-    auto path = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first();
-    qDebug() << path;
+        auto compilers = findCompilers();
+        auto path = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first();
+        qDebug() << path;
 
-    new DialogOutput(nullptr, compilers.first(), {"-v", path + "/main.c", "-o", path + "/MyIDEApplication"}, QProcess::MergedChannels);
-    new DialogOutput(nullptr, "ls", {path}, QProcess::MergedChannels);
+        new DialogOutput(nullptr, compilers.first(), {"-v", path + "/main.c", "-o", path + "/MyIDEApplication"}, QProcess::MergedChannels);
+        new DialogOutput(nullptr, "ls", {path}, QProcess::MergedChannels);
 
 
-    return app.exec();
+        return app.exec();
 
-}
+    }
