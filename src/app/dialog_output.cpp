@@ -18,6 +18,12 @@ DialogOutput::DialogOutput(QWidget *parent,
                            const QStringList &args,
                            QProcess::ProcessChannelMode mode) : DialogOutput(parent)
 {
+    if(mode == QProcess::MergedChannels)
+    {
+        delete ui->error_label; ui->error_label = nullptr;
+        delete ui->errors_widget; ui->errors_widget = nullptr;
+        delete ui->error_layout; ui->error_layout= nullptr;
+    }
     innerProcess = new ProcessLauncher(this);
     innerProcess->launchProcess(name, args, mode);
     QObject::connect(innerProcess, &ProcessLauncher::processClosed, this, &DialogOutput::UpdateOnFinshedProcess);
@@ -45,6 +51,12 @@ DialogOutput::~DialogOutput()
 
 void DialogOutput::setErrorContent(const QByteArray &src)
 {
+    //If merged channels, do nothing :
+    if (!ui->errors_widget)
+    {
+        return;
+    }
+
     //auto string = QTextCodec::codecForMib(1016)->toUnicode(src); //Seems to crash in Windows
     auto string = src;
     ui->errors_widget->setText(string);
