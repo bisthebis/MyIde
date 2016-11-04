@@ -3,6 +3,7 @@
 
 #include <QTextBrowser>
 #include <QTextCodec>
+#include <QDebug>
 
 DialogOutput::DialogOutput(QWidget *parent) :
     QDialog(parent),
@@ -12,9 +13,34 @@ DialogOutput::DialogOutput(QWidget *parent) :
     setWindowTitle("Output of command");
 }
 
+DialogOutput::DialogOutput(QWidget *parent,
+                           const QString &name,
+                           const QStringList &args,
+                           QProcess::ProcessChannelMode mode) : DialogOutput(parent)
+{
+    innerProcess = new ProcessLauncher(this);
+    innerProcess->launchProcess(name, args, mode);
+    QObject::connect(innerProcess, &ProcessLauncher::processClosed, this, &DialogOutput::UpdateOnFinshedProcess);
+    show();
+}
+void DialogOutput::UpdateOnFinshedProcess(int code)
+{
+    setWindowTitle(tr("Process exited with status %0.").arg(code));
+    setStdoutContent(innerProcess->getStdout());
+    setErrorContent(innerProcess->getErrors());
+
+
+}
+
+void DialogOutput::closeEvent(QCloseEvent *)
+{
+    deleteLater();
+}
+
 DialogOutput::~DialogOutput()
 {
     delete ui;
+    qDebug() << "Closed DialogOutput";
 }
 
 void DialogOutput::setErrorContent(const QByteArray &src)
