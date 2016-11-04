@@ -18,5 +18,7 @@ Dialog_output::~Dialog_output()
 
 void Dialog_output::setContent(const QByteArray &src)
 {
-    ui->errors_widget->setText(QTextCodec::codecForMib(1016)->toUnicode(src));
+    //auto string = QTextCodec::codecForMib(1016)->toUnicode(src); //Seems to crash in Windows
+    auto string = src;
+    ui->errors_widget->setText(string);
 }
