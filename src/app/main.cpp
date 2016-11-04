@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
 
-    auto compilers = find_compilers();
+    auto compilers = findCompilers();
     auto path = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first();
     qDebug() << path;
 
