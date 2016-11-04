@@ -1,4 +1,5 @@
 #include "json_project.h"
+#include "compiler_processes/find_fileinfos.hpp"
 #include <QtCore>
 
 void JSONProject::open(const QString &name)
@@ -35,5 +36,6 @@ void JSONProject::build(const QString& workingDir)
     {
         QStringList parameters;
         parameters << files << "-o" << executableName << "-v";
-        emit buildRequested("gcc", parameters, workingDir);
+        auto compiler = findCompilers().first();
+        emit buildRequested(compiler, parameters, workingDir);
     }

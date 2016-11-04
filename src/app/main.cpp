@@ -23,6 +23,7 @@ int main(int argc, char** argv)
         qDebug() << "Files to compile are : " << project.getFilesList();
         QObject::connect(&project, &JSONProject::buildRequested, [&](QString compiler, QStringList args, QString dir)
             {
+                qDebug() << "Build requested. Compiler : " << compiler << ". Arguments : " << args;
                 auto dialog = new DialogOutput(nullptr, compiler, args, QProcess::MergedChannels, dir);
             });
         project.build(path);
