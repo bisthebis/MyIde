@@ -11,7 +11,7 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
 
     ProcessLauncher launcher;
-    Dialog_output dialog;
+    DialogOutput dialog;
     dialog.show();
 
     QObject::connect(&launcher, &ProcessLauncher::processClosed,

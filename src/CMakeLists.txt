@@ -1,15 +1,4 @@
-file(GLOB MAIN_FILES . *.cpp)
-file(GLOB UIs . *.ui)
-add_executable (ide ${MAIN_FILES} ${UIs} )
-
-find_package (Qt5Core REQUIRED)
-find_package (Qt5Gui REQUIRED)
-find_package (Qt5Widgets REQUIRED)
-
-target_link_libraries (ide Qt5::Core)
-target_link_libraries (ide Qt5::Gui)
-target_link_libraries (ide Qt5::Widgets)
-target_link_libraries (ide compiler_processes)
 
 add_subdirectory(compiler_processes)
+add_subdirectory(app)
 add_subdirectory(tests)

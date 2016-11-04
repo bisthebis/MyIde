@@ -7,14 +7,14 @@ namespace Ui {
 class Dialog_output;
 }
 
-class Dialog_output : public QDialog
+class DialogOutput : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Dialog_output(QWidget *parent = 0);
+    explicit DialogOutput(QWidget *parent = 0);
     void setContent(const QByteArray& src);
-    ~Dialog_output();
+    ~DialogOutput();
 
 private:
     Ui::Dialog_output *ui;
