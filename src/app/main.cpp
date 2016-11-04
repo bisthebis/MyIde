@@ -27,7 +27,9 @@ int main(int argc, char** argv)
     });
 
     auto compilers = find_compilers();
-    launcher.launchProcess(compilers.first(), {"-v", "main.c", "-o", "MyIDEApplication"}, QProcess::MergedChannels);
+    auto path = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).first();
+    qDebug() << path;
+    launcher.launchProcess(compilers.first(), {"-v", path + "/main.c", "-o", path + "/MyIDEApplication"}, QProcess::MergedChannels);
 	
 	return app.exec();
 
