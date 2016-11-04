@@ -13,7 +13,7 @@ class ProcessLauncher : public QObject
     Q_OBJECT
     public:
         explicit ProcessLauncher(QObject *parent = 0);
-        const QByteArray& getStdout() const {return stdout;}
+        const QByteArray& getStdout() const {return _stdout;}
         const QByteArray& getErrors() const {return errors;}
 
 
@@ -23,7 +23,7 @@ class ProcessLauncher : public QObject
         void launchProcess(const QString& name, const QStringList& args);
 
     private:
-        QByteArray stdout;
+        QByteArray _stdout;
         QByteArray errors;
         QProcess* process = nullptr;
 
