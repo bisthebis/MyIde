@@ -1,5 +1,6 @@
 file(GLOB MAIN_FILES . *.cpp)
-add_executable (ide ${MAIN_FILES} )
+file(GLOB UIs . *.ui)
+add_executable (ide ${MAIN_FILES} ${UIs} )
 
 find_package (Qt5Core REQUIRED)
 find_package (Qt5Gui REQUIRED)

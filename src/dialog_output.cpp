@@ -18,6 +18,5 @@ Dialog_output::~Dialog_output()
 
 void Dialog_output::setContent(const QByteArray &src)
 {
-    QTextBrowser* wid = ui->errors_widget;
-    wid->setText(QTextCodec::codecForMib(1016)->toUnicode(src));
+    ui->errors_widget->setText(QTextCodec::codecForMib(1016)->toUnicode(src));
 }
