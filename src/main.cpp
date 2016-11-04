@@ -2,32 +2,28 @@
 #include <QCoreApplication>
 #include <QProcess>
 
-#include "libtmp/find_compilers.hpp"
-
+#include "compiler_processes/find_compilers.hpp"
+#include "compiler_processes/processlauncher.h"
 
 int main(int argc, char** argv)
 {
 	QCoreApplication app(argc, argv);
 
-    auto compilers = find_compilers();
+    ProcessLauncher launcher;
+    QObject::connect(&launcher, &ProcessLauncher::processClosed,
+                     [&](int x) {
+        qDebug() << "Process exited with status : " << x;
+        auto out = launcher.getStdout();
+        if (!out.isEmpty())
+            qDebug() << "Output : " << QTextCodec::codecForMib(1016)->toUnicode(out);
 
-    QProcess* process = new QProcess(&app);
-    process->setProcessChannelMode(QProcess::MergedChannels);
-    qDebug() << "Launching compiler : " << compilers.first();
-    QStringList options = {"-v"};
-
-
-    QObject::connect(process, &QProcess::readyRead,
-                     [process]() {
-        qDebug() << "stdout : " << process->readAll();
-
+        auto err = launcher.getErrors();
+        if (!err.isEmpty())
+            qDebug() << "Errors : " << QTextCodec::codecForMib(1016)->toUnicode(err);
     });
 
-    QObject::connect(process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-                     [](int code){qDebug() << "Leaving with code : " << code;; qApp->quit();});
-
-    process->start(compilers.first(), options);
-    qDebug() << "Process start with options : " << process->arguments();
+    auto compilers = find_compilers();
+    launcher.launchProcess(compilers.first(), {"-v"});
 	
 	return app.exec();
 

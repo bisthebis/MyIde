@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "libtmp/find_compilers.hpp"
+#include "compiler_processes/find_compilers.hpp"
 
 #include <QDebug>
 
