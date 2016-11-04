@@ -2,7 +2,7 @@
 #include <QApplication>
 #include <QProcess>
 
-#include "compiler_processes/find_compilers.hpp"
+#include "compiler_processes/find_fileinfos.hpp"
 #include "compiler_processes/processlauncher.h"
 #include "dialog_output.h"
 
