@@ -20,7 +20,9 @@ class ProcessLauncher : public QObject
     signals:
         void processClosed(int);
     public slots:
-        void launchProcess(const QString& name, const QStringList& args, QProcess::ProcessChannelMode mode = QProcess::SeparateChannels);
+        void launchProcess(const QString& name,
+                           const QStringList& args,
+                           QProcess::ProcessChannelMode mode = QProcess::SeparateChannels);
 
     private:
         QByteArray _stdout;
