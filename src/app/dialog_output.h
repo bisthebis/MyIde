@@ -13,7 +13,9 @@ class DialogOutput : public QDialog
 
 public:
     explicit DialogOutput(QWidget *parent = 0);
-    void setContent(const QByteArray& src);
+    void setErrorContent(const QByteArray& src);
+    void setStdoutContent(const QByteArray& src);
+
     ~DialogOutput();
 
 private:

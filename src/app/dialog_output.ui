@@ -15,7 +15,32 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QTextBrowser" name="errors_widget"/>
+    <layout class="QVBoxLayout" name="stdout_layout">
+     <item>
+      <widget class="QLabel" name="stdout_label">
+       <property name="text">
+        <string>Standard output :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="stdout_widget"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="error_layout">
+     <item>
+      <widget class="QLabel" name="error_label">
+       <property name="text">
+        <string>Standard errors</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="errors_widget"/>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

@@ -19,15 +19,15 @@ int main(int argc, char** argv)
         qDebug() << "Process exited with status : " << x;
         auto out = launcher.getStdout();
         if (!out.isEmpty())
-            qDebug() << "Output : " << QTextCodec::codecForMib(1016)->toUnicode(out);
+            dialog.setStdoutContent(out);
 
         auto err = launcher.getErrors();
         if (!err.isEmpty())
-            dialog.setContent(err);
+            dialog.setErrorContent(err);
     });
 
     auto compilers = find_compilers();
-    launcher.launchProcess(compilers.first(), {"-v"});
+    launcher.launchProcess(compilers.first(), {"-v", "main.c", "-o", "MyIDEApplication"}, QProcess::MergedChannels);
 	
 	return app.exec();
 

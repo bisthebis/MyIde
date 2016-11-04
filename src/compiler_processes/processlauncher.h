@@ -2,8 +2,8 @@
 #define PROCESSLAUNCHER_H
 
 #include <QObject>
+#include <QProcess>
 
-class QProcess;
 class QString;
 class QStringList;
 class QByteArray;
@@ -20,7 +20,7 @@ class ProcessLauncher : public QObject
     signals:
         void processClosed(int);
     public slots:
-        void launchProcess(const QString& name, const QStringList& args);
+        void launchProcess(const QString& name, const QStringList& args, QProcess::ProcessChannelMode mode = QProcess::SeparateChannels);
 
     private:
         QByteArray _stdout;
