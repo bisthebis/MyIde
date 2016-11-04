@@ -22,7 +22,8 @@ class ProcessLauncher : public QObject
     public slots:
         void launchProcess(const QString& name,
                            const QStringList& args,
-                           QProcess::ProcessChannelMode mode = QProcess::SeparateChannels);
+                           QProcess::ProcessChannelMode mode = QProcess::SeparateChannels,
+                           const QString& workingDir = "");
 
     private:
         QByteArray _stdout;

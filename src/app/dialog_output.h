@@ -18,7 +18,8 @@ class DialogOutput : public QDialog
         explicit DialogOutput(QWidget *parent,
                               const QString& name,
                               const QStringList& args,
-                              QProcess::ProcessChannelMode mode = QProcess::SeparateChannels);
+                              QProcess::ProcessChannelMode mode = QProcess::SeparateChannels,
+                              const QString& workingDir = "");
         void setErrorContent(const QByteArray& src);
         void setStdoutContent(const QByteArray& src);
 

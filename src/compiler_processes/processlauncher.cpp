@@ -10,7 +10,7 @@ ProcessLauncher::ProcessLauncher(QObject *parent) : QObject(parent)
 
     }
 
-void ProcessLauncher::launchProcess(const QString &name, const QStringList &args, QProcess::ProcessChannelMode mode)
+void ProcessLauncher::launchProcess(const QString &name, const QStringList &args, QProcess::ProcessChannelMode mode, const QString& workingDir)
     {
         //Cleanup
         if (process)
@@ -23,6 +23,8 @@ void ProcessLauncher::launchProcess(const QString &name, const QStringList &args
 
 
         process = new QProcess(this);
+        if (!workingDir.isEmpty())
+            process->setWorkingDirectory(workingDir);
         process->setProcessChannelMode(mode);
         QProcess *process_handle = process;
         connect(process, &QProcess::readyReadStandardError,

@@ -16,7 +16,8 @@ DialogOutput::DialogOutput(QWidget *parent) :
 DialogOutput::DialogOutput(QWidget *parent,
                            const QString &name,
                            const QStringList &args,
-                           QProcess::ProcessChannelMode mode) : DialogOutput(parent)
+                           QProcess::ProcessChannelMode mode,
+                           const QString& workingDir) : DialogOutput(parent)
     {
         if(mode == QProcess::MergedChannels)
             {
@@ -25,7 +26,7 @@ DialogOutput::DialogOutput(QWidget *parent,
                 delete ui->error_layout; ui->error_layout= nullptr;
             }
         innerProcess = new ProcessLauncher(this);
-        innerProcess->launchProcess(name, args, mode);
+        innerProcess->launchProcess(name, args, mode, workingDir);
         QObject::connect(innerProcess, &ProcessLauncher::processClosed, this, &DialogOutput::UpdateOnFinshedProcess);
         show();
     }
