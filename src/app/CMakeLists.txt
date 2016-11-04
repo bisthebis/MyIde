@@ -11,5 +11,6 @@ target_link_libraries (ide Qt5::Core)
 target_link_libraries (ide Qt5::Gui)
 target_link_libraries (ide Qt5::Widgets)
 target_link_libraries (ide compiler_processes)
+target_link_libraries (ide project)
 
 
